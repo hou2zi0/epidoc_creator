@@ -253,15 +253,15 @@ class EED {
         });
 
 
-
+        // Decoration Notes via Iconclass
         Array.from(document.getElementsByClassName('decoNote')).forEach((item) => {
             item.addEventListener('input', function(e){
                 const input = this.value;
                 var re = new RegExp(input, 'i');
-                const sublist = DATA.iconclass.filter((item) => {
-                    return item.match(re); 
+                const sublist = ICONCLASS.filter((item) => {
+                    return item.name.match(re); 
                 }).map((item) => {
-                    return `<p style="background: lightgrey;">${item}</p>`
+                    return `<p style="background: lightgrey;" data-uri="${item.uri}">${item.name}</p>`
                 }).join('\n');
 
                 //console.log(sublist);
@@ -279,6 +279,8 @@ class EED {
                 sublist_items.forEach((item) => {
                     item.addEventListener('click', (e) => {
                         this.value = item.textContent;
+                        this.title = item.dataset.uri;
+                        this.dataset.uri = item.dataset.uri;
                         this.nextElementSibling.innerHTML = '';
                     })
                 });
@@ -286,14 +288,14 @@ class EED {
             });
         })
 
-
+        // Original Place
         document.getElementById('origPlace').addEventListener('input', function(e){
                 const input = this.value;
                 var re = new RegExp(input, 'i');
                 const sublist = PLEIADES.filter((item) => {
                     return item.name.match(re); 
                 }).map((item) => {
-                    return `<p style="background: lightgrey;">${item.name}</p>`
+                    return `<p style="background: lightgrey;" data-uri="${item.uri}">${item.name}</p>`
                 }).join('\n');
 
                 //console.log(sublist);
@@ -311,6 +313,8 @@ class EED {
                 sublist_items.forEach((item) => {
                     item.addEventListener('click', (e) => {
                         this.value = item.textContent;
+                        this.title = item.dataset.uri;
+                        this.dataset.uri = item.dataset.uri;
                         this.nextElementSibling.innerHTML = '';
                     })
                 });
