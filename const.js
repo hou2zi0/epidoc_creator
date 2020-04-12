@@ -24,13 +24,13 @@ const CONST = {
                 <p><label for="layout">Layout:</label> <input type="text" value="" placeholder="Write something..." id="layout" name="layout"></p>
             </div>`,
     "handDesc": `<div id="handDesc" class="subsection">
-                    <p><label for="handNote">Hand note:</label> <input type="text" value="" placeholder="Write something..." id="handNote" name="handNote"></p>
+                    <p><label for="handNote">Hand note:</label> <input type="text" value="" placeholder="Write something..." class="handNote" name="handNote"></p>
                 </div>`,
     "scriptDesc": `<div id="scriptDesc" class="subsection">
                     <p><label for="scriptNote">Script note:</label> <input type="text" value="" placeholder="Write something..." id="scriptNote" name="scriptNote"></p>
                 </div>`,
     "decoDesc": `<div id="decoDesc" class="subsection">
-                        <p><label for="decoNote">Deco note:</label> <input type="text" value="" placeholder="Write something..." id="decoNote" name="decoNote"></p>
+                        <p><label for="decoNote">Deco note:</label> <input type="text" value="" placeholder="Write something..." class="decoNote" name="decoNote"></p>
                     </div>`,
     "history": `<div id="history" class="subsection">
                     <div id="origin">
