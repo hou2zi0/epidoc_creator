@@ -12,7 +12,7 @@ const CONST = {
                         <p><label for="idno">Inventory number:</label> <input type="text" value="" placeholder="Write something..." id="idno" name="idno"></p>
                     </div>`,
     "supportDesc": `<div id="supportDesc" class="subsection">
-                    <p><label for="material">Material:</label> <input type="text" value="" placeholder="Write something..." id="material" name="material"></p>
+                    <p><label for="material">Material:</label> <input type="text" value="" placeholder="Write something..." class="material" name="material"></p>
                     <p><label for="objectType">Object type:</label> <input type="text" value="" placeholder="Write something..." id="objectType" name="objectType"></p>
                     <ul id="dimensions">Dimensions:
                         <li><label for="height">Height:</label> <input type="text" value="" placeholder="Write something..." id="height" name="height"></li>
