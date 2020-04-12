@@ -12,16 +12,19 @@
     .blg {
         border-left: 1em green solid;
         padding-left: 1em;
+        z-index: -1;
     }
 
     .blr {
         border-left: 1em red solid;
         padding-left: 1em;
+        z-index: -1;
     }
 
     .subsection {
         border-left: .5em lightskyblue solid;
         padding-left: .5em;
+        z-index: -1;
     }
 
     .flexbox {
@@ -101,6 +104,13 @@
     .rs-place:before {
         content: "🏛️";
         padding-right: .1em;
+    }
+
+    /* form fields and autosuggest */
+    div.iconclass {
+        position: absolute;
+        z-index: 100;
+        background-color: white;
     }
     </style>
 </head>

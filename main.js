@@ -235,6 +235,25 @@ class EED {
     }
 
     eventListeners(){
+
+        Array.from(document.querySelectorAll('input')).forEach((item) => {
+            item.addEventListener('focus', function(e){
+                Array.from(document.getElementsByClassName('autosuggest')).forEach((element) => {
+                    element.innerHTML = ''; 
+                });
+            });
+
+            item.addEventListener('keyup', function(e){
+                if(e.key == 'Escape'){
+                    if(e.target.nextElementSibling){
+                        e.target.nextElementSibling.innerHTML = ''; 
+                    }
+                }
+            });
+        });
+
+
+
         Array.from(document.getElementsByClassName('decoNote')).forEach((item) => {
             item.addEventListener('input', function(e){
                 const input = this.value;
@@ -249,21 +268,21 @@ class EED {
                 
                 if(!this.nextElementSibling) {
                     const iconclass_suggestions = document.createElement('DIV');
-                    iconclass_suggestions.id = "iconclass";
+                    iconclass_suggestions.className = "iconclass autosuggest";
                     iconclass_suggestions.innerHTML = sublist;
                     this.parentElement.appendChild(iconclass_suggestions);
                 } else {
                     this.nextElementSibling.innerHTML = sublist;
                 }
 
-                const sublist_items = Array.from(document.querySelectorAll('div#iconclass > p'));
+                const sublist_items = Array.from(this.nextElementSibling.querySelectorAll('p'));
                 sublist_items.forEach((item) => {
                     item.addEventListener('click', (e) => {
                         this.value = item.textContent;
                         this.nextElementSibling.innerHTML = '';
                     })
                 });
-                
+
             });
         })
     }
