@@ -29,6 +29,13 @@ class EED {
 
             container.innerHTML += CONST.listPerson;
 
+            Array.from(document.getElementsByClassName('person')).forEach((i) => {
+                console.log(i.id);
+                const uid = `person--${Math.random().toString().slice(2)}`;
+                i.id = uid;
+                i.title = uid;
+            });
+
             container.innerHTML += CONST.facsimile;
             container.innerHTML += `<div><button id="download">Download</button></iv>
                                     <div class="flexbox" id="text_section">
@@ -112,7 +119,7 @@ class EED {
                     static create(value) {
                     let node = super.create();
                     node.setAttribute("data-annotation", 'person');
-                    node.setAttribute("data-uid", '12345');
+                    node.setAttribute("data-uid", `${Math.random().toString().slice(2)}`);
                     return node;
                     }
                     static formats(node) {
@@ -135,7 +142,7 @@ class EED {
                     static create(value) {
                     let node = super.create();
                     node.setAttribute("data-annotation", 'place');
-                    node.setAttribute("data-uid", '12345');
+                    node.setAttribute("data-uid", `${Math.random().toString().slice(2)}`);
                     return node;
                     }
                     static formats(node) {
