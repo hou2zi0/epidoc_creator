@@ -36,6 +36,15 @@ class EED {
                 i.title = uid;
             });
 
+            container.innerHTML += CONST.listPlace;
+
+            Array.from(document.getElementsByClassName('place')).forEach((i) => {
+                console.log(i.id);
+                const uid = `place--${Math.random().toString().slice(2)}`;
+                i.id = uid;
+                i.title = uid;
+            });
+
             container.innerHTML += CONST.facsimile;
             container.innerHTML += `<div><button id="download">Download</button></iv>
                                     <div class="flexbox" id="text_section">
@@ -443,6 +452,41 @@ class EED {
                 });
 
             });
+            
+        Array.from(document.getElementsByClassName('placeName')).forEach((element) => {
+            element.addEventListener('input', function(e){
+                const input = this.value;
+                var re = new RegExp(input, 'i');
+                const sublist = PLEIADES.filter((item) => {
+                    return item.name.match(re); 
+                }).map((item) => {
+                    return `<p style="background: lightgrey;" data-uri="${item.uri}">${item.name}</p>`
+                }).join('\n');
+
+                //console.log(sublist);
+                
+                if(!this.nextElementSibling) {
+                    const iconclass_suggestions = document.createElement('DIV');
+                    iconclass_suggestions.className = "pleiades autosuggest";
+                    iconclass_suggestions.innerHTML = sublist;
+                    this.parentElement.appendChild(iconclass_suggestions);
+                } else {
+                    this.nextElementSibling.innerHTML = sublist;
+                }
+
+                const sublist_items = Array.from(this.nextElementSibling.querySelectorAll('p'));
+                sublist_items.forEach((item) => {
+                    item.addEventListener('click', (e) => {
+                        this.value = item.textContent;
+                        this.title = item.dataset.uri;
+                        this.dataset.uri = item.dataset.uri;
+                        this.nextElementSibling.innerHTML = '';
+                    })
+                });
+
+            });
+        });
+
     }
 
 

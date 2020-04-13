@@ -52,6 +52,14 @@ const CONST = {
                             <p><label for="death">Death:</label> <input type="date" class="death" name="death"></p>
                         </div>
                     </div>`,
+    "listPlace": `<div id="listPLace" class="blr">
+                    <div class="place blg" id="abcdefgh123456789">
+                        <p><label for="placeName">Placename:</label> <input type="text" value="" placeholder="Write something..." class="placeName" name="placeName"></p>
+                    </div>
+                    <div class="place blg" id="zyxpqrs0987654321">
+                        <p><label for="placeName">Placename:</label> <input type="text" value="" placeholder="Write something..." class="placeName" name="placeName"></p>
+                    </div>
+                </div>`,
     "facsimile": `<div id="facsimile">
                     <p><label for="graphic">Facsimile:</label> <input type="text" value="http://www.steinheim-institut.de/daten/picsffb/xl/ffb0098.jpg" placeholder="Write something..." class="graphic" name="graphic"> <button class="graphic_button">Show</button></p>
                 </div>`,
