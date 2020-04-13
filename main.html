@@ -71,8 +71,12 @@
         content: "🏛️";
     }
 
-    .ql-br:after {
-        content: "br";
+    .ql-lb:after {
+        content: "lb";
+    }
+
+    .ql-id-selector:before {
+        content: "id";
     }
 
     .break {
@@ -113,6 +117,16 @@
         background-color: white;
         overflow-y: auto;
         max-height: 200px;
+    }
+
+     /* form fields and autosuggest */
+     div#id-matching {
+        position: absolute;
+        z-index: 100;
+        background-color: white;
+        overflow-y: auto;
+        max-height: 200px;
+        border: 1px solid black;
     }
     </style>
 </head>

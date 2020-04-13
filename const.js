@@ -40,6 +40,18 @@ const CONST = {
                     <p><label for="provenance_found">Provenance (found):</label> <input type="text" value="" placeholder="Write something..." id="provenance_found" name="provenance_found"></p>
                     <p><label for="provenance_observed">Provenance (observed):</label> <input type="text" value="" placeholder="Write something..." id="provenance_observed" name="provenance_observed"></p>
                 </div>`,
+    "listPerson": `<div id="listPerson" class="blr">
+                        <div class="person blg" id="abcdefgh123456789">
+                            <p><label for="persName">Name:</label> <input type="text" value="John Doe" placeholder="Write something..." class="persName" name="persName"></p>
+                            <p><label for="birth">Birth:</label> <input type="date" class="birth" name="birth"></p>
+                            <p><label for="death">Death:</label> <input type="date" class="death" name="death"></p>
+                        </div>
+                        <div class="person blg" id="zyxpqrs0987654321">
+                            <p><label for="persName">Name:</label> <input type="text" value="Jane Doe" placeholder="Write something..." class="persName" name="persName"></p>
+                            <p><label for="birth">Birth:</label> <input type="date" class="birth" name="birth"></p>
+                            <p><label for="death">Death:</label> <input type="date" class="death" name="death"></p>
+                        </div>
+                    </div>`,
     "facsimile": `<div id="facsimile">
                     <p><label for="graphic">Facsimile:</label> <input type="text" value="http://www.steinheim-institut.de/daten/picsffb/xl/ffb0098.jpg" placeholder="Write something..." class="graphic" name="graphic"> <button class="graphic_button">Show</button></p>
                 </div>`,

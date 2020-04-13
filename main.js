@@ -27,8 +27,11 @@ class EED {
             fileDesc.innerHTML += sourceDesc.outerHTML;
             container.appendChild(fileDesc);
 
+            container.innerHTML += CONST.listPerson;
+
             container.innerHTML += CONST.facsimile;
-            container.innerHTML += `<div class="flexbox" id="text_section">
+            container.innerHTML += `<div><button id="download">Download</button></iv>
+                                    <div class="flexbox" id="text_section">
                                         <div id="transcription">
                                             <div id="transcription_editor">
                                                 <p>Hello World!</p>
@@ -109,11 +112,13 @@ class EED {
                     static create(value) {
                     let node = super.create();
                     node.setAttribute("data-annotation", 'person');
+                    node.setAttribute("data-uid", '12345');
                     return node;
                     }
                     static formats(node) {
                     node = {
                         annotation: node.getAttribute("data-annotation"),
+                        uid: node.getAttribute("data-uid")
                     };
                     return node;
                     }
@@ -124,15 +129,19 @@ class EED {
                 RS_Person.className = 'rs-person';
                 Quill.register(RS_Person);
 
+
+                /* ****************** */
                 class RS_Place extends Inline {
                     static create(value) {
                     let node = super.create();
                     node.setAttribute("data-annotation", 'place');
+                    node.setAttribute("data-uid", '12345');
                     return node;
                     }
                     static formats(node) {
                     node = {
                         annotation: node.getAttribute("data-annotation"),
+                        uid: node.getAttribute("data-uid")
                     };
                     return node;
                     }
@@ -143,27 +152,28 @@ class EED {
                 RS_Place.className = 'rs-place';
                 Quill.register(RS_Place);
                 
+                /* ****************************** */
                 // BR
                 class BR extends Inline {
                     static create(value) {
                     let node = super.create();
-                    node.setAttribute("data-annotation", 'br');
+                    node.setAttribute("data-n", value[0]);
                     return node;
                     }
                     static formats(node) {
                     node = {
-                        annotation: node.getAttribute("data-annotation"),
+                        n: node.getAttribute("data-n"),
                     };
                     return node;
                     }
                 }
                 // Registering
-                BR.blotName = "br";
+                BR.blotName = "lb";
                 BR.tagName = "span";
                 BR.className = 'break';
                 Quill.register(BR);
                 
-                var toolbarOptions = [['bold', 'italic', 'underline', 'strike'], ['rs-person', 'rs-place', 'br']];
+                var toolbarOptions = [['bold', 'italic', 'underline', 'strike'], ['rs-person', 'rs-place', 'lb', 'id-selector']];
     
 
                 var quill = new Quill('#transcription_editor', {
@@ -176,11 +186,9 @@ class EED {
                 var rs_person_button = document.querySelector('button.ql-rs-person');
                 rs_person_button.addEventListener('click', function() {
                     const item = 'person';
-                    console.log(quill.getFormat().SPAN);
+                    console.log(quill.getFormat());
                     if (quill.getFormat().SPAN === undefined) {
                         console.log("undef");
-                        console.log(quill.getSelection());
-                        
                         let { index, length } = quill.getSelection();
                         quill.format("SPAN", [item, index, index + length]);
                       } else if (quill.getFormat().SPAN.annotation === item) {
@@ -211,25 +219,62 @@ class EED {
                       }
                 });
 
-                var br_button = document.querySelector('button.ql-br');
+                var br_button = document.querySelector('button.ql-lb');
                 br_button.addEventListener('click', function() {
-                    const item = 'br';
-                    console.log(quill.getFormat().SPAN);
+                    const item = 'lb';
+                    let { index, length } = quill.getSelection();
+                    let text = quill.getText(index, index+length)
+                    console.log(text);
+                    
                     if (quill.getFormat().SPAN === undefined) {
-                        console.log("undef");
-                        console.log(quill.getSelection());
-                        
-                        let { index, length } = quill.getSelection();
-                        quill.format("SPAN", [item, index, index]);
+                        //  "br" bezieht sich auf blot name, nur so können daten dynamisch übergeben werden; anderswo anpassen
+                        quill.format("lb", [text]);
                       } else if (quill.getFormat().SPAN.annotation === item) {
-                        let { index, length } = quill.getSelection();
                         quill.removeFormat(index, length);
                       } else {
-                        let { index, length } = quill.getSelection();
-                        quill.format("SPAN", [item, index, index]);
+                        quill.format("lb", [text]);
                       }
                 });
 
+                document.querySelector('button.ql-id-selector').addEventListener('click', function(e){
+                    //<div id="id-matching"></div>
+                    const uid = quill.getFormat()['rs-person'].uid
+
+                    const pers_ids = Array.from(document.getElementsByClassName('person')).map((element) => {
+                        return { "name": Array.from(element.getElementsByClassName('persName')).map((i) => { return i.value; }).join(';') , "id": element.id } ;
+                    }).map((item) => {
+                        return `<p title="${item.name}">${item.id}</p>`;
+                    });
+
+                    e.target.innerHTML = `<div id="id-matching">
+                                                ${ pers_ids.join('\n') }
+                                            </div>`;
+
+                    Array.from(document.querySelectorAll('div#id-matching > p')).forEach((item) => {
+                        item.addEventListener(
+                            'click',
+                            function(e){
+                                const pers_id = e.target.textContent;
+                                console.log(pers_id);
+                                
+                                Array.from(document.querySelectorAll('[data-uid]')).filter((item) => {
+                                    return item.dataset.uid == uid;
+                                }).forEach((item) => {
+                                    item.dataset.pers_id = pers_id;
+                                    item.title = pers_id;
+                                });
+
+                                document.querySelector('button.ql-id-selector').innerHTML = '';
+                                
+                            }
+                        );
+                    });
+                });
+
+                document.getElementById('download').addEventListener('click', (e) => {
+                    console.log(quill.getContents());
+                    
+                })
               
         }
     }
@@ -285,6 +330,7 @@ class EED {
                 });
 
             });
+            
         })
 
 
