@@ -297,6 +297,10 @@ class EED {
 
     eventListeners(){
 
+        const HELPERS = {
+            createAutosuggest: this.createAutosuggest
+        }
+
         Array.from(document.querySelectorAll('input')).forEach((item) => {
             item.addEventListener('focus', function(e){
                 Array.from(document.getElementsByClassName('autosuggest')).forEach((element) => {
@@ -326,30 +330,7 @@ class EED {
 
                 //console.log(sublist);
                 
-                if(!this.nextElementSibling) {
-                    const iconclass_suggestions = document.createElement('DIV');
-                    iconclass_suggestions.className = "iconclass autosuggest";
-                    iconclass_suggestions.innerHTML = sublist;
-                    this.parentElement.appendChild(iconclass_suggestions);
-                } else {
-                    this.nextElementSibling.innerHTML = sublist;
-                }
-
-                const sublist_items = Array.from(this.nextElementSibling.querySelectorAll('p'));
-                sublist_items.forEach((item) => {
-                    item.addEventListener('click', (e) => {
-                        this.value = item.textContent;
-                        this.title = item.dataset.uri;
-                        this.dataset.uri = item.dataset.uri;
-                        this.nextElementSibling.innerHTML = '';
-                        if(!this.nextElementSibling.nextElementSibling){
-                            const span = document.createElement('SPAN');
-                            span.className = "norm-data-uris";
-                            this.nextElementSibling.insertAdjacentElement('afterend', span);
-                        }
-                        this.nextElementSibling.nextElementSibling.textContent = item.dataset.uri;
-                    })
-                });
+                HELPERS.createAutosuggest(this, sublist, "iconclass"); // change
 
             });
             
@@ -369,31 +350,7 @@ class EED {
 
                 //console.log(sublist);
                 
-                if(!this.nextElementSibling) {
-                    const iconclass_suggestions = document.createElement('DIV');
-                    iconclass_suggestions.className = "iconclass autosuggest";
-                    iconclass_suggestions.innerHTML = sublist;
-                    this.parentElement.appendChild(iconclass_suggestions);
-                } else {
-                    this.nextElementSibling.innerHTML = sublist;
-                }
-
-                const sublist_items = Array.from(this.nextElementSibling.querySelectorAll('p'));
-                sublist_items.forEach((item) => {
-                    item.addEventListener('click', (e) => {
-                        this.value = item.textContent;
-                        this.title = item.dataset.uri;
-                        this.dataset.uri = item.dataset.uri;
-                        this.nextElementSibling.innerHTML = '';
-                        if(!this.nextElementSibling.nextElementSibling){
-                            const span = document.createElement('SPAN');
-                            span.className = "norm-data-uris";
-                            this.nextElementSibling.insertAdjacentElement('afterend', span);
-                        }
-                        this.nextElementSibling.nextElementSibling.textContent = item.dataset.uri;
-                    })
-                });
-
+                HELPERS.createAutosuggest(this, sublist, "iconclass"); // change
             });
         })
 
@@ -410,30 +367,7 @@ class EED {
 
                 //console.log(sublist);
                 
-                if(!this.nextElementSibling) {
-                    const iconclass_suggestions = document.createElement('DIV');
-                    iconclass_suggestions.className = "iconclass autosuggest";
-                    iconclass_suggestions.innerHTML = sublist;
-                    this.parentElement.appendChild(iconclass_suggestions);
-                } else {
-                    this.nextElementSibling.innerHTML = sublist;
-                }
-
-                const sublist_items = Array.from(this.nextElementSibling.querySelectorAll('p'));
-                sublist_items.forEach((item) => {
-                    item.addEventListener('click', (e) => {
-                        this.value = item.textContent;
-                        this.title = item.dataset.uri;
-                        this.dataset.uri = item.dataset.uri;
-                        this.nextElementSibling.innerHTML = '';
-                        if(!this.nextElementSibling.nextElementSibling){
-                            const span = document.createElement('SPAN');
-                            span.className = "norm-data-uris";
-                            this.nextElementSibling.insertAdjacentElement('afterend', span);
-                        }
-                        this.nextElementSibling.nextElementSibling.textContent = item.dataset.uri;
-                    })
-                });
+                HELPERS.createAutosuggest(this, sublist, "iconclass");
 
             });
         })
@@ -450,30 +384,7 @@ class EED {
 
                 //console.log(sublist);
                 
-                if(!this.nextElementSibling) {
-                    const iconclass_suggestions = document.createElement('DIV');
-                    iconclass_suggestions.className = "pleiades autosuggest";
-                    iconclass_suggestions.innerHTML = sublist;
-                    this.parentElement.appendChild(iconclass_suggestions);
-                } else {
-                    this.nextElementSibling.innerHTML = sublist;
-                }
-
-                const sublist_items = Array.from(this.nextElementSibling.querySelectorAll('p'));
-                sublist_items.forEach((item) => {
-                    item.addEventListener('click', (e) => {
-                        this.value = item.textContent;
-                        this.title = item.dataset.uri;
-                        this.dataset.uri = item.dataset.uri;
-                        this.nextElementSibling.innerHTML = '';
-                        if(!this.nextElementSibling.nextElementSibling){
-                            const span = document.createElement('SPAN');
-                            span.className = "norm-data-uris";
-                            this.nextElementSibling.insertAdjacentElement('afterend', span);
-                        }
-                        this.nextElementSibling.nextElementSibling.textContent = item.dataset.uri;
-                    })
-                });
+                HELPERS.createAutosuggest(this, sublist, "pleiades");
 
             });
             
@@ -489,31 +400,7 @@ class EED {
 
                 //console.log(sublist);
                 
-                if(!this.nextElementSibling) {
-                    const iconclass_suggestions = document.createElement('DIV');
-                    iconclass_suggestions.className = "pleiades autosuggest";
-                    iconclass_suggestions.innerHTML = sublist;
-                    this.parentElement.appendChild(iconclass_suggestions);
-                } else {
-                    this.nextElementSibling.innerHTML = sublist;
-                }
-
-                const sublist_items = Array.from(this.nextElementSibling.querySelectorAll('p'));
-                sublist_items.forEach((item) => {
-                    item.addEventListener('click', (e) => {
-                        this.value = item.textContent;
-                        this.title = item.dataset.uri;
-                        this.dataset.uri = item.dataset.uri;
-                        this.nextElementSibling.innerHTML = '';
-                        if(!this.nextElementSibling.nextElementSibling){
-                            const span = document.createElement('SPAN');
-                            span.className = "norm-data-uris";
-                            this.nextElementSibling.insertAdjacentElement('afterend', span);
-                        }
-                        this.nextElementSibling.nextElementSibling.textContent = item.dataset.uri;
-                    })
-                });
-
+                HELPERS.createAutosuggest(this, sublist, "pleiades");
             });
         });
 
@@ -529,35 +416,40 @@ class EED {
                         return `<p style="background: lightgrey;" data-uri="${item.id}">${item.label} (${item.category})</p>`
                     }).join('\n')
 
-
-                    if(!this.nextElementSibling) {
-                        const gnd_suggestions = document.createElement('DIV');
-                        gnd_suggestions.className = "gnd autosuggest";
-                       gnd_suggestions.innerHTML = sublist;
-                        this.parentElement.appendChild(gnd_suggestions);
-                    } else {
-                        this.nextElementSibling.innerHTML = sublist;
-                    }
-    
-                    const sublist_items = Array.from(this.nextElementSibling.querySelectorAll('p'));
-                    sublist_items.forEach((item) => {
-                        item.addEventListener('click', (e) => {
-                            this.value = item.textContent;
-                            this.title = item.dataset.uri;
-                            this.dataset.uri = item.dataset.uri;
-                            this.nextElementSibling.innerHTML = '';
-                            if(!this.nextElementSibling.nextElementSibling){
-                                const span = document.createElement('SPAN');
-                                span.className = "norm-data-uris";
-                                this.nextElementSibling.insertAdjacentElement('afterend', span);
-                            }
-                            this.nextElementSibling.nextElementSibling.textContent = item.dataset.uri;
-                        })
-                    });
+                    HELPERS.createAutosuggest(this, sublist, "gnd");
+                    
                 });
             });
         });
 
+    }
+
+
+    createAutosuggest(that, sublist, type){
+        if(!that.nextElementSibling) {
+            const suggestions = document.createElement('DIV');
+            suggestions.className = `${type} autosuggest`;
+           suggestions.innerHTML = sublist;
+           that.parentElement.appendChild(suggestions);
+        } else {
+            that.nextElementSibling.innerHTML = sublist;
+        }
+
+        const sublist_items = Array.from(that.nextElementSibling.querySelectorAll('p'));
+        sublist_items.forEach((item) => {
+            item.addEventListener('click', (e) => {
+                that.value = item.textContent;
+                that.title = item.dataset.uri;
+                that.dataset.uri = item.dataset.uri;
+                that.nextElementSibling.innerHTML = '';
+                if(!that.nextElementSibling.nextElementSibling){
+                    const span = document.createElement('SPAN');
+                    span.className = "norm-data-uris";
+                    that.nextElementSibling.insertAdjacentElement('afterend', span);
+                }
+                that.nextElementSibling.nextElementSibling.textContent = item.dataset.uri;
+            })
+        });
     }
 
 
@@ -572,7 +464,7 @@ class EED {
         return div 
     }
   }
-
+ 
 
   var eed = new EED('epidoc'); 
 
