@@ -342,6 +342,12 @@ class EED {
                         this.title = item.dataset.uri;
                         this.dataset.uri = item.dataset.uri;
                         this.nextElementSibling.innerHTML = '';
+                        if(!this.nextElementSibling.nextElementSibling){
+                            const span = document.createElement('SPAN');
+                            span.className = "norm-data-uris";
+                            this.nextElementSibling.insertAdjacentElement('afterend', span);
+                        }
+                        this.nextElementSibling.nextElementSibling.textContent = item.dataset.uri;
                     })
                 });
 
@@ -379,6 +385,12 @@ class EED {
                         this.title = item.dataset.uri;
                         this.dataset.uri = item.dataset.uri;
                         this.nextElementSibling.innerHTML = '';
+                        if(!this.nextElementSibling.nextElementSibling){
+                            const span = document.createElement('SPAN');
+                            span.className = "norm-data-uris";
+                            this.nextElementSibling.insertAdjacentElement('afterend', span);
+                        }
+                        this.nextElementSibling.nextElementSibling.textContent = item.dataset.uri;
                     })
                 });
 
@@ -414,6 +426,12 @@ class EED {
                         this.title = item.dataset.uri;
                         this.dataset.uri = item.dataset.uri;
                         this.nextElementSibling.innerHTML = '';
+                        if(!this.nextElementSibling.nextElementSibling){
+                            const span = document.createElement('SPAN');
+                            span.className = "norm-data-uris";
+                            this.nextElementSibling.insertAdjacentElement('afterend', span);
+                        }
+                        this.nextElementSibling.nextElementSibling.textContent = item.dataset.uri;
                     })
                 });
 
@@ -448,6 +466,12 @@ class EED {
                         this.title = item.dataset.uri;
                         this.dataset.uri = item.dataset.uri;
                         this.nextElementSibling.innerHTML = '';
+                        if(!this.nextElementSibling.nextElementSibling){
+                            const span = document.createElement('SPAN');
+                            span.className = "norm-data-uris";
+                            this.nextElementSibling.insertAdjacentElement('afterend', span);
+                        }
+                        this.nextElementSibling.nextElementSibling.textContent = item.dataset.uri;
                     })
                 });
 
@@ -481,9 +505,56 @@ class EED {
                         this.title = item.dataset.uri;
                         this.dataset.uri = item.dataset.uri;
                         this.nextElementSibling.innerHTML = '';
+                        if(!this.nextElementSibling.nextElementSibling){
+                            const span = document.createElement('SPAN');
+                            span.className = "norm-data-uris";
+                            this.nextElementSibling.insertAdjacentElement('afterend', span);
+                        }
+                        this.nextElementSibling.nextElementSibling.textContent = item.dataset.uri;
                     })
                 });
 
+            });
+        });
+
+        Array.from(document.getElementsByClassName('persName')).forEach((item) => {
+            item.addEventListener('input', function(e){
+                const query = `https://lobid.org/gnd/search?q=${this.value}&format=json%3ApreferredName%2CprofessionOrOccupation`;
+                fetch(query)
+                .then(r => r.json())
+                .then((j) => {
+                    console.log(j.length)
+                    
+                    const sublist = j.map((item) => {
+                        return `<p style="background: lightgrey;" data-uri="${item.id}">${item.label} (${item.category})</p>`
+                    }).join('\n')
+
+
+                    if(!this.nextElementSibling) {
+                        const gnd_suggestions = document.createElement('DIV');
+                        gnd_suggestions.className = "gnd autosuggest";
+                       gnd_suggestions.innerHTML = sublist;
+                        this.parentElement.appendChild(gnd_suggestions);
+                    } else {
+                        this.nextElementSibling.innerHTML = sublist;
+                    }
+    
+                    const sublist_items = Array.from(this.nextElementSibling.querySelectorAll('p'));
+                    sublist_items.forEach((item) => {
+                        item.addEventListener('click', (e) => {
+                            this.value = item.textContent;
+                            this.title = item.dataset.uri;
+                            this.dataset.uri = item.dataset.uri;
+                            this.nextElementSibling.innerHTML = '';
+                            if(!this.nextElementSibling.nextElementSibling){
+                                const span = document.createElement('SPAN');
+                                span.className = "norm-data-uris";
+                                this.nextElementSibling.insertAdjacentElement('afterend', span);
+                            }
+                            this.nextElementSibling.nextElementSibling.textContent = item.dataset.uri;
+                        })
+                    });
+                });
             });
         });
 
